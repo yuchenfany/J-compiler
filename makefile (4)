@@ -1,0 +1,16 @@
+token.o: token.c token.h
+	clang -g -c token.c
+	
+assembly.o: assembly.c assembly.h token.h
+	clang -g -c assembly.c
+	
+compiler.o: compiler.c assembly.h token.h
+	clang -g -c compiler.c
+	
+combined: compiler.o assembly.o token.o
+	clang -g -o jc compiler.o assembly.o token.o
+	
+jc: combined
+
+clean :
+	rm jc *.o
